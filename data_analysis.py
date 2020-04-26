@@ -1,6 +1,9 @@
+import random
+import pandas
+import numpy as np
 from pathlib import Path
 
-calculatedTime = []
+calculatedTime = np.array([])
 
 
 def getFromFile(fileName, ID):
@@ -56,7 +59,23 @@ def checkLines(lines, ID):
 
 def getListLength():
     print(len(calculatedTime))
+    return len(calculatedTime)
+
+def getAverage():
+    print(calculatedTime.mean())
+    return calculatedTime.mean()
 
 
-getFromFile("name.txt", "0000000000000000")
+def debugFillList():
+    global calculatedTime
+    for i in range(0, 100):
+        n = random.randint(1, 20)
+        calculatedTime = np.append(calculatedTime, n)
+    print(calculatedTime)
+
+
+#getFromFile("name.txt", "0000000000000000")
+#For debugging
+debugFillList()
 getListLength()
+getAverage()
