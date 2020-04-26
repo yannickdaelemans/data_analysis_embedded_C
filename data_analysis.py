@@ -27,6 +27,7 @@ def getFromFile(fileName, ID):
 
 
 def checkLines(lines, ID):
+    global calculatedTime
     if lines[0] != ID:
         print("file ID", lines[0] , "and ID", ID)
         print("Error in file, ID")
@@ -52,7 +53,7 @@ def checkLines(lines, ID):
         print("time:", time)
         return
 
-    calculatedTime.append(time)
+    calculatedTime = np.append(calculatedTime, time)
     print("line put in list")
     return
 
