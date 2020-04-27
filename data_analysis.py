@@ -1,6 +1,6 @@
 import random
-import pandas
 import numpy as np
+import matplotlib.pyplot as plt
 from pathlib import Path
 
 calculatedTime = np.array([])
@@ -57,6 +57,9 @@ def checkLines(lines, ID):
     print("line put in list")
     return
 
+def printList():
+    print(calculatedTime)
+
 
 def getListLength():
     print(len(calculatedTime))
@@ -69,14 +72,30 @@ def getAverage():
 
 def debugFillList():
     global calculatedTime
-    for i in range(0, 100):
-        n = random.randint(1, 20)
+    for i in range(0, 1000):
+        n = random.randint(35000, 35020)
         calculatedTime = np.append(calculatedTime, n)
     print(calculatedTime)
+
+
+def printBarChart():
+    ax = plt.subplot()
+    ax.axvline(calculatedTime.mean())
+
+
+    (uniqueValues, counts) = np.unique(np.sort(calculatedTime), return_counts=True)
+    #uniqueValues = np.sort(uniqueValues)
+    print(uniqueValues)
+    print(counts)
+    plt.bar(uniqueValues, counts)
+    plt.show()
+    return
 
 
 #getFromFile("name.txt", "0000000000000000")
 #For debugging
 debugFillList()
+printList()
 getListLength()
 getAverage()
+printBarChart()
