@@ -81,13 +81,12 @@ def debugFillList():
 def printBarChart():
     ax = plt.subplot()
     ax.axvline(calculatedTime.mean())
-
-
     (uniqueValues, counts) = np.unique(np.sort(calculatedTime), return_counts=True)
-    #uniqueValues = np.sort(uniqueValues)
     print(uniqueValues)
     print(counts)
     plt.bar(uniqueValues, counts)
+    plt.xlabel("calculated clock cycles needed")
+    plt.ylabel("amount")
     plt.show()
     return
 
