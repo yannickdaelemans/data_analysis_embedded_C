@@ -5,12 +5,12 @@ from pathlib import Path
 
 # This is the data analysis for the RAM extension module
 
-
-calculatedTimeOKWrite = np.array([])
-calculatedTimeOKRead = np.array([])
-calculatedTimeNW = np.array([])
-calculatedTimeNR = np.array([])
-calculatedTimeNO = np.array([])
+# all the numpy arrays for all the available data.
+calculatedTimeOKWrite = np.array([])        # array of all the successful writing operations
+calculatedTimeOKRead = np.array([])         # array of all the successful reading operations
+calculatedTimeNW = np.array([])             # array of all the no response writing operations
+calculatedTimeNR = np.array([])             # array of all the no response reading operations
+calculatedTimeNO = np.array([])             # array of all the wrong response reading operations
 calculatedTimeAllReading = np.array([])
 calculatedTimeAllWriting = np.array([])
 calculatedTimeNORESP= np.array([])
@@ -56,8 +56,6 @@ def checkLines(lines, ID):
 
     readWrite = "0"
     if lines[0] != ID:
-        #print("file ID", lines[0] , "and ID", ID)
-        #print("Error in file beginning protocol")
         return
     if lines[1] == write:
         readWrite = "Write"
@@ -66,7 +64,6 @@ def checkLines(lines, ID):
     else:
         return
     if int(lines[7], 2) != 0:
-        #print("Error in file ending protocol")
         return
 
     address = int(lines[2], 2)
@@ -101,13 +98,10 @@ def checkLines(lines, ID):
         if response == OKRead:
             calculatedTimeOKRead = np.append(calculatedTimeOKRead, time)
         elif response == NotResponse:
-            print("address: ", address, " , data", timeEnd)
             calculatedTimeNR = np.append(calculatedTimeNR, time)
         elif response == WrongResponse or response == AllZeroesResponse or response == AllOnesResponse:
-            print("address: ", address, " , data", timeEnd)
             calculatedTimeNO = np.append(calculatedTimeNO, time)
             if response == WrongResponse:
-                print("address: ", address, " , data", timeEnd)
                 calculatedTimeNORESP = np.append(calculatedTimeNORESP, time)
             elif response == AllZeroesResponse:
                 calculatedTimeNO00 = np.append(calculatedTimeNO00, time)
@@ -116,9 +110,6 @@ def checkLines(lines, ID):
 
 
     return
-
-def printList():
-    print(calculatedTimeOKWrite)
 
 
 def getListLengths():
@@ -135,16 +126,15 @@ def getListLengths():
     print("total amount writings = ", len(calculatedTimeAllWriting))
     print("total amount Readings = ", len(calculatedTimeAllReading))
 
-def printWrongReads():
-    print("total amount Readings = ", len(calculatedTimeAllReading))
 
+# read average timings of the operations which are successful
 def getAverage():
     print("average OK WRITE", calculatedTimeOKWrite.mean())
     print("average OK READ", calculatedTimeOKRead.mean())
 
 
 
-
+# Print a bar chart with the timings of the writing operations
 def printBarChartWriting():
     ax = plt.subplot()
     (uniqueValues, counts) = np.unique(np.sort(calculatedTimeAllWriting), return_counts=True)
@@ -169,6 +159,7 @@ def printBarChartWriting():
     plt.show()
     return
 
+# Print a bar chart with the timings of the reading operations
 def printBarChartReading():
     ax = plt.subplot()
     (uniqueValues, counts) = np.unique(np.sort(calculatedTimeAllReading), return_counts=True)
@@ -205,8 +196,8 @@ WrongResponse = "0100111101001110"
 AllZeroesResponse = "0011000000110000"
 AllOnesResponse = "0011000100110001"
 
-#getFromFile("TesterRCoreDRK.txt", "0000000000000000")
-getFromFile("alltestingMSP.txt", "0000000000000000")
+getFromFile("TesterRCoreDRK.txt", "0000000000000000")
+#getFromFile("alltestingMSP.txt", "0000000000000000")
 #getFromFile("filef.txt", "0000000000000000")
 
 #printList()
