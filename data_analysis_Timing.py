@@ -43,7 +43,7 @@ calculatedTimewhile_function_0 = np.array([])
 calculatedTimewhile_function_const = np.array([])
 
 
-
+# reading from the file, putting it in an array, and checking the lines afterwards
 def getFromFile(fileName, ID):
     home = str(Path.home())
     file = open(home + "\\" + fileName, "r")
@@ -62,7 +62,7 @@ def getFromFile(fileName, ID):
 
     file.close()
 
-
+#check if the lines are okay, and put in the right array
 def checkLines(lines, ID):
     global calculatedTimeuintfun
     global calculatedTimeintfun
