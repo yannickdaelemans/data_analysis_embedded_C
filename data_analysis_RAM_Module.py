@@ -18,7 +18,7 @@ calculatedTimeNO00 = np.array([])
 calculatedTimeNO11 = np.array([])
 index = 0
 
-
+#reading from file, Read in 8 lines each time
 def getFromFile(fileName, ID):
     home = str(Path.home())
     file = open(home + "\\" + fileName, "r")
@@ -37,7 +37,7 @@ def getFromFile(fileName, ID):
 
     file.close()
 
-
+# check if lines are correct, and put in right array
 def checkLines(lines, ID):
     global index
     global calculatedTimeOKWrite
