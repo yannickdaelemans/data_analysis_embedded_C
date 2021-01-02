@@ -198,9 +198,7 @@ AllOnesResponse = "0011000100110001"
 
 getFromFile("TesterRCoreDRK.txt", "0000000000000000")
 #getFromFile("alltestingMSP.txt", "0000000000000000")
-#getFromFile("filef.txt", "0000000000000000")
 
-#printList()
 getListLengths()
 getAverage()
 printBarChartWriting()
